@@ -10,7 +10,7 @@ define root view entity ZAV_C_INVOICE
     CustomerId,
     InvoiceDate,
     CurrencyCode,
-    PaymentMetod,
+    PaymentMethod,
     TotalAmount,
     Status,
     Description,

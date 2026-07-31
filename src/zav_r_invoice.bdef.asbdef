@@ -1,0 +1,85 @@
+managed implementation in class zbp_av_r_invoice unique;
+strict ( 2 );
+with draft;
+extensible;
+
+define behavior for ZAV_R_INVOICE alias Invoice
+persistent table zav_invoice
+draft table zav_invoice_d
+lock master total etag LastChangedAt
+late numbering
+authorization master ( global )
+etag master LocalLastChangedBy
+with additional save
+extensible
+{
+  create;
+  update ( features : instance );
+  delete ( features : instance );
+  field ( readonly ) InvoiceId;
+
+  draft action Activate optimized;
+  draft action Discard;
+  draft action Edit;
+  draft action Resume;
+
+  draft determine action Prepare
+  {
+
+  }
+
+
+  mapping for zav_invoice corresponding extensible
+    {
+      InvoiceId          = invoice_id;
+      CustomerId         = customer_id;
+      InvoiceDate        = invoice_date;
+      CurrencyCode       = currency_code;
+      PaymentMethod      = payment_method;
+      TotalAmount        = total_amount;
+      Status             = status;
+      Description        = description;
+      CreatedBy          = created_by;
+      CreatedAt          = created_at;
+      LocalLastChangedBy = local_last_changed_by;
+      LocalLastChangedAt = local_last_changed_at;
+      LastChangedAt      = last_changed_at;
+    }
+
+  association _Item { create; with draft; }
+}
+
+
+
+define behavior for ZAV_R_ITEM alias Item
+persistent table zav_item
+draft table zav_item_d
+lock dependent by _Invoice
+authorization dependent by _Invoice
+late numbering
+{
+  update;
+  delete;
+  field ( readonly ) InvoiceId, ItemId;
+
+
+  mapping for zav_item corresponding
+    {
+      InvoiceId          = invoice_id;
+      ItemId             = item_id;
+      ProductId          = product_id;
+      Description        = description;
+      Quantity           = quantity;
+      CurrencyCode       = currency_code;
+      UnitPrice          = unit_price;
+      ItemAmount         = item_amount;
+      CreatedBy          = created_by;
+      CreatedAt          = created_at;
+      LocalLastChangedBy = local_last_changed_by;
+      LocalLastChangedAt = local_last_changed_at;
+      LastChangedAt      = last_changed_at;
+    }
+
+
+  association _Invoice { with draft; }
+}

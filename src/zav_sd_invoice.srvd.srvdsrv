@@ -1,0 +1,5 @@
+@EndUserText.label: 'Service definition factura'
+define service ZAV_SD_INVOICE {
+  expose ZAV_C_INVOICE;
+  expose ZAV_C_ITEM;
+}

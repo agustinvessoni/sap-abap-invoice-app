@@ -1,0 +1,54 @@
+@Metadata.layer: #CORE
+@UI.headerInfo: {
+  typeName: 'Invoice',
+  typeNamePlural: 'Invoices',
+  title:       { type: #STANDARD, value: 'InvoiceId' },
+  description: { type: #STANDARD, value: 'CustomerId' }
+}
+annotate entity ZAV_C_INVOICE with
+{
+  @UI.facet: [
+  { id: 'GeneralInfo', type: #IDENTIFICATION_REFERENCE,
+  label: 'Invoice Information', position: 10 },
+  { id: 'Items', type: #LINEITEM_REFERENCE,
+  label: 'Invoice Items', position: 20,
+  targetElement: '_Item' }
+  ]
+
+  @UI.lineItem: [{ position: 10, label: 'Invoice' }]
+  @UI.identification:[{ position: 10, label: 'Invoice' }]
+  InvoiceId;
+
+  @UI.lineItem:      [{ position: 20, label: 'CustomerId' }]
+  @UI.identification:[{ position: 20, label: 'CustomerId' }]
+  @UI.selectionField: [{ position: 10 }]
+  CustomerId;
+
+  @UI.lineItem:      [{ position: 30, label: 'Date' }]
+  @UI.identification:[{ position: 30, label: 'Date' }]
+  @UI.selectionField: [{ position: 20 }]
+  InvoiceDate;
+  
+  @UI.lineItem:      [{ position: 40, label: 'Payment Method' }]
+  @UI.identification:[{ position: 40, label: 'Payment Method' }]
+  @UI.selectionField: [{ position: 30 }]
+  PaymentMethod;
+
+  @UI.lineItem:      [{ position: 50, label: 'Status' }]
+  @UI.identification:[{ position: 50, label: 'Status' }]
+  @UI.selectionField: [{ position: 40 }]
+  Status;
+
+  @UI.lineItem:      [{ position: 60, label: 'Currency' }]
+  @UI.identification:[{ position: 60, label: 'Currency' }]
+  CurrencyCode;
+  
+  @UI.identification:[{ position: 70, label: 'Total' }]
+  @UI.lineItem:      [{ position: 70, label: 'Total' }]
+  TotalAmount;
+
+  @UI.lineItem:      [{ position: 80, label: 'Description' }]
+  @UI.identification:[{ position: 80, label: 'Description' }]
+  Description;
+  
+}

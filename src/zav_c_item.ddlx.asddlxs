@@ -1,0 +1,38 @@
+@Metadata.layer: #CORE
+@UI.headerInfo: {
+  typeName: 'Invoice Item',
+  typeNamePlural: 'Invoice Items',
+  title:       { type: #STANDARD, value: 'ItemId' },
+  description: { type: #STANDARD, value: 'ProductId' }
+}
+annotate entity ZAV_C_ITEM with 
+{
+  @UI.facet: [{ id: 'ItemInfo', type: #IDENTIFICATION_REFERENCE,
+               label: 'Item Information', position: 10 }]
+
+  @UI.lineItem:      [{ position: 10, label: 'Invoice ID' }]
+  @UI.identification:[{ position: 10, label: 'Invoice ID' }]
+  InvoiceId;
+
+  @UI.lineItem:      [{ position: 20, label: 'Item ID' }]
+  @UI.identification:[{ position: 20, label: 'Item ID' }]
+  ItemId;
+
+  @UI.lineItem:      [{ position: 30, label: 'Product' }]
+  @UI.identification:[{ position: 30, label: 'Product' }]
+  ProductId;
+
+  @UI.lineItem:      [{ position: 40, label: 'Quantity' }]
+  @UI.identification:[{ position: 40, label: 'Quantity' }]
+  Quantity;
+
+  @UI.lineItem:      [{ position: 50, label: 'Unit Price' }]
+  @UI.identification:[{ position: 50, label: 'Unit Price' }]
+  UnitPrice;
+
+  @UI.lineItem:      [{ position: 60, label: 'Total' }]
+  @UI.identification:[{ position: 60, label: 'Total' }]
+  ItemAmount;
+
+    
+}
